@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyBuddie</title>
+
+  <style>
+    * { 
+      margin:0; 
+      padding:0; 
+      box-sizing:border-box; 
+      font-family: Arial, sans-serif; 
+    }
+
+    body { 
+      background: #e9e9e9; 
+    }
+
+    .container { 
+      max-width: 2000px; 
+      margin: 30px auto; 
+      padding:20px; 
+      background: url("StudyBuddie/background.jpg"); /* FIXED FOR GITHUB */
+      background-size: cover; 
+      background-position: center; 
+      border-radius: 20px; 
+      box-shadow:0 0 15px rgba(0,0,0,0.2); 
+      min-height:90vh; 
+    }
+
+    .navbar { 
+      display:flex; 
+      justify-content:space-between; 
+      align-items:center; 
+      padding:15px 30px; 
+      flex-wrap:wrap; 
+      gap:15px; 
+    }
+
+    .logo-area { 
+      display:flex; 
+      align-items:center; 
+      gap:12px; 
+    }
+
+    .logo-area img { 
+      width:80px; 
+      height:80px; 
+      border-radius:50%; 
+      border:2px solid black; 
+      object-fit:cover; 
+    }
+
+    .logo { 
+      font-size:30px; 
+      font-weight:bold; 
+      color:black; 
+      display:flex; 
+      align-items:center; 
+    }
+
+    .logo span { 
+      color:orange; 
+      font-size:45px; 
+      font-weight:bold; 
+      padding-right:5px; 
+    }
+
+    .nav-links { 
+      display:flex; 
+      gap:25px; 
+      flex-wrap:wrap; 
+    }
+
+    .nav-links button { 
+      border:none; 
+      background:transparent; 
+      font-weight:bold; 
+      cursor:pointer; 
+      font-size:14px; 
+      transition:0.2s; 
+    }
+
+    .nav-links button:hover { 
+      color:orange; 
+      transform:scale(1.05); 
+    }
+
+    .search-section { 
+      text-align:center; 
+      margin-top:40px; 
+    }
+
+    .search-bar { 
+      width:60%; 
+      padding:15px; 
+      border-radius:30px; 
+      border:2px solid black; 
+      font-size:16px; 
+      outline:none; 
+      max-width:700px; 
+    }
+
+    .title { 
+      text-align:center; 
+      margin:40px 0 20px; 
+      font-size:24px; 
+      font-weight:bold; 
+    }
+
+    .course-grid { 
+      display:grid; 
+      grid-template-columns:repeat(auto-fit, minmax(250px,1fr)); 
+      gap:20px; 
+      padding:20px; 
+    }
+
+    .course-card { 
+      background:white; 
+      border-radius:15px; 
+      overflow:hidden; 
+      border:2px solid black; 
+      box-shadow:0 0 10px rgba(0,0,0,0.15); 
+      text-align:center; 
+      transition:0.2s; 
+    }
+
+    .course-card:hover { 
+      transform:scale(1.03); 
+    }
+
+    .course-card img { 
+      width:100%; 
+      height:140px; 
+      object-fit:cover; 
+    }
+
+    .course-card h3 { 
+      padding:10px; 
+      font-size:18px; 
+      font-weight:bold; 
+      text-transform:uppercase; 
+    }
+
+    .course-card button { 
+      width:100%; 
+      padding:12px; 
+      border:none; 
+      background:#f1f1f1; 
+      font-weight:bold; 
+      cursor:pointer; 
+      transition:0.2s; 
+    }
+
+    .course-card button:hover { 
+      background:orange; 
+    }
+
+    .see-more { 
+      text-align:center; 
+      margin-top:20px; 
+    }
+
+    .see-more button { 
+      padding:12px 30px; 
+      border-radius:10px; 
+      border:2px solid black; 
+      font-weight:bold; 
+      cursor:pointer; 
+      background:orange; 
+      transition:0.2s; 
+    }
+
+    .see-more button:hover { 
+      background:darkorange; 
+    }
+
+    .webinar-btn { 
+      padding:12px 30px; 
+      border-radius:10px; 
+      border:2px solid black; 
+      font-weight:bold; 
+      cursor:pointer; 
+      background:orange; 
+      transition:0.2s; 
+    }
+
+    .webinar-btn:hover { 
+      background:darkorange; 
+    }
+
+    footer { 
+      text-align:center; 
+      margin-top:40px; 
+      padding:15px; 
+      font-weight:bold; 
+    }
+
+    @media(max-width:600px) { 
+      .search-bar{width:90%;} 
+      .logo{font-size:24px;} 
+      .logo-area img{width:38px;height:38px;} 
+      .logo span{font-size:32px;} 
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- NAVBAR -->
+    <div class="navbar">
+      <div class="logo-area">
+        <img src="StudyBuddie/capybara.jpg" alt="Capybara Logo"> <!-- FIXED -->
+        <div class="logo"><span>S</span>TUDYBUDDIE</div>
+      </div>
+
+      <div class="nav-links">
+        <button onclick="scrollToSection('about')">ABOUT</button>
+        <button onclick="scrollToSection('course')">COURSE</button>
+        <button onclick="scrollToSection('webinar')">WEBINAR</button>
+        <button onclick="scrollToSection('contact')">CONTACT</button>
+        <button onclick="userLogin()">USER</button>
+      </div>
+    </div>
+
+    <!-- SEARCH -->
+    <div class="search-section">
+      <input type="text" class="search-bar" id="searchInput" placeholder="SEARCH WHAT YOU WANT TO LEARN" onkeyup="searchCourses()" />
+    </div>
+
+    <!-- COURSES -->
+    <h2 class="title" id="course">POPULAR COURSES</h2>
+    <div class="course-grid" id="courseGrid">
+
+      <!-- MAIN COURSES -->
+      <div class="course-card" data-name="data science">
+        <img src="StudyBuddie/data science.jpg" alt="Data Science"> <!-- FIXED -->
+        <h3>DATA SCIENCE</h3>
+        <button onclick="joinCourse('https://www.youtube.com/watch?v=xPh5ihBWang')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card" data-name="digital marketing">
+        <img src="StudyBuddie/digital marketing.jpg" alt="Digital Marketing"> <!-- FIXED -->
+        <h3>DIGITAL MARKETING</h3>
+        <button onclick="joinCourse('https://youtube.com/playlist?list=PL9ooVrP1hQOH-nMMFeSG-DFwyATtUg4YA&si=dpLJ71Ty2fQtZpgl')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card" data-name="machine learning">
+        <img src="StudyBuddie/machine learning.jpg" alt="Machine Learning"> <!-- FIXED -->
+        <h3>MACHINE LEARNING</h3>
+        <button onclick="joinCourse('https://youtube.com/playlist?list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&si=-1Bm0bQVDeOSJtl1')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card" data-name="cybersecurity">
+        <img src="StudyBuddie/cybersecurity.jpg" alt="Cybersecurity"> <!-- FIXED -->
+        <h3>CYBERSECURITY</h3>
+        <button onclick="joinCourse('https://youtube.com/playlist?list=PL9ooVrP1hQOGPQVeapGsJCktzIO4DtI4_&si=Y6IQeG2fr2HaVX11')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card" data-name="japan cuisine">
+        <img src="StudyBuddie/Japan cuisine.jpg" alt="Japan Cuisine"> <!-- FIXED -->
+        <h3>JAPAN CUISINE</h3>
+        <button onclick="joinCourse('https://youtu.be/Ireil53PgoE?si=ay7sSJbaIzDCCSpx')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card" data-name="game development">
+        <img src="StudyBuddie/game developer.jpg" alt="Game Development"> <!-- FIXED -->
+        <h3>GAME DEVELOPMENT</h3>
+        <button onclick="joinCourse('https://youtube.com/playlist?list=PLzDRvYVwl53uAyV0SjL_3d_IoRDiybAdN&si=Qkzwvhu3dkoJb-M2')">CLICK TO JOIN</button>
+      </div>
+
+      <!-- EXTRA COURSES -->
+      <div class="course-card extra-course" style="display:none;" data-name="graphic design">
+        <img src="StudyBuddie/graphic design.jpg" alt="Graphic Design"> <!-- FIXED -->
+        <h3>GRAPHIC DESIGN</h3>
+        <button onclick="joinCourse('https://youtu.be/GQS7wPujL2k?si=b5UdwJ7XsZAC3q6d')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card extra-course" style="display:none;" data-name="web development">
+        <img src="StudyBuddie/Web Developer.jpg" alt="Web Development"> <!-- FIXED -->
+        <h3>WEB DEVELOPMENT</h3>
+        <button onclick="joinCourse('https://youtube.com/playlist?list=PLZPZq0r_RZOPP5Yjt6IqgytMRY5uLt4y3&si=AK5fNXGIlCq6To8h')">CLICK TO JOIN</button>
+      </div>
+
+      <div class="course-card extra-course" style="display:none;" data-name="video editing">
+        <img src="StudyBuddie/video editing.jpg" alt="Video Editing"> <!-- FIXED -->
+        <h3>VIDEO EDITING</h3>
+        <button onclick="joinCourse('https://youtu.be/NgrXxAPxmEY?si=Jw63D8coEFposJeE')">CLICK TO JOIN</button>
+      </div>
+
+    </div>
+
+    <!-- SEE MORE BUTTON -->
+    <div class="see-more">
+      <button id="toggleBtn" onclick="toggleCourses()">SEE MORE</button>
+    </div>
+
+    <!-- ABOUT -->
+    <h2 class="title" id="about">ABOUT</h2>
+    <p style="text-align:center; padding:20px;">
+      StudyBuddie is a platform where you can learn skills like Data Science, Marketing, Cybersecurity, and more.
+    </p>
+
+    <!-- WEBINAR -->
+    <h2 class="title" id="webinar">WEBINAR</h2>
+    <p style="text-align:center; padding:20px;">
+      Click now to join live sessions with experts and learn more.
+    </p>
+
+    <div style="text-align:center;">
+      <button class="webinar-btn" onclick="joinWebinar()">CLICK HERE</button>
+    </div>
+
+    <!-- CONTACT -->
+    <h2 class="title" id="contact">CONTACT</h2>
+    <p style="text-align:center; padding:20px;">
+      Email: studybuddie@email.com <br>
+      Email: john.therence.jawod07@gmail.com <br>
+      Phone: 09632807569
+    </p>
+
+    <footer>
+      © 2026 StudyBuddie. All Rights Reserved.
+    </footer>
+
+  </div>
+
+  <script>
+    // JOIN COURSE BUTTON
+    function joinCourse(courseURL) {
+      window.open(courseURL, "_blank");
+    }
+
+    // WEBINAR BUTTON
+    function joinWebinar() {
+      window.open("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "_blank"); 
+    }
+
+    // USER BUTTON
+    function userLogin() {
+      alert("Redirecting to User Login...");
+    }
+
+    // NAVBAR SCROLL
+    function scrollToSection(sectionId) {
+      document.getElementById(sectionId).scrollIntoView({ behavior: "smooth" });
+    }
+
+    // SEARCH FILTER
+    function searchCourses() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let courses = document.querySelectorAll(".course-card");
+
+      courses.forEach(course => {
+        let name = course.getAttribute("data-name");
+        course.style.display = name.includes(input) ? "block" : "none";
+      });
+    }
+
+    // SEE MORE / SEE LESS TOGGLE
+    let expanded = false;
+
+    function toggleCourses() {
+      let extraCourses = document.querySelectorAll(".extra-course");
+      let btn = document.getElementById("toggleBtn");
+
+      if (!expanded) {
+        extraCourses.forEach(course => course.style.display = "block");
+        btn.innerText = "SEE LESS";
+        expanded = true;
+      } else {
+        extraCourses.forEach(course => course.style.display = "none");
+        btn.innerText = "SEE MORE";
+        expanded = false;
+      }
+    }
+  </script>
+</body>
+</html>
